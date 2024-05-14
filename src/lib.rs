@@ -13,6 +13,7 @@ use std::{
 use egui::{
   Align2, Context, Id, Key, Layout, Pos2, RichText, ScrollArea, TextEdit, Ui, Vec2, Window,
 };
+use nih_plug_egui::egui;
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 /// Dialog state.
