@@ -192,8 +192,8 @@ impl FileDialog {
   }
 
   /// Set the default file name.
-  pub fn default_filename(mut self, filename: impl Into<String>) -> Self {
-    self.filename_edit = filename.into();
+  pub fn default_filename(mut self, filename: String) -> Self {
+    self.filename_edit = filename;
     self
   }
 
