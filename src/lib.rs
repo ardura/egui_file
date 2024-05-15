@@ -334,8 +334,8 @@ impl FileDialog {
   }
 
   /// Set the dialog's current opened path
-  pub fn set_path(&mut self, path: impl Into<PathBuf>) {
-    self.path = path.into();
+  pub fn set_path(&mut self, path: PathBuf) {
+    self.path = path;
     self.refresh();
   }
 
