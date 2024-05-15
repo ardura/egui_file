@@ -192,9 +192,8 @@ impl FileDialog {
   }
 
   /// Set the default file name.
-  pub fn default_filename(mut self, filename: String) -> Self {
+  pub fn default_filename(&mut self, filename: String) {
     self.filename_edit = filename;
-    self
   }
 
   /// Set the window title text.
