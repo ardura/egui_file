@@ -572,7 +572,7 @@ impl FileDialog {
             let enter_pressed = ctx.input(|state| state.key_pressed(Key::Enter));
 
             if enter_pressed && (self.filename_filter)(self.filename_edit.as_str()) {
-              let path = self.path.join(&self.filename_edit);
+              let mut path = self.path.join(&self.filename_edit);
               match self.dialog_type {
                 DialogType::SelectFolder => command = Some(Command::Folder),
                 DialogType::OpenFile => {
@@ -581,6 +581,9 @@ impl FileDialog {
                   }
                 }
                 DialogType::SaveFile => {
+                  if !path.ends_with("actuate") {
+                    path.set_extension("actuate");
+                  }
                   let file_info = FileInfo::new(path);
                   command = Some(match file_info.is_dir() {
                     true => Command::Open(file_info),
