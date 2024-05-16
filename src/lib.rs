@@ -127,23 +127,23 @@ pub type Filter<T> = Box<dyn Fn(&<T as Deref>::Target) -> bool + Send + Sync + '
 
 impl FileDialog {
   /// Create dialog that prompts the user to select a folder.
-  pub fn select_folder(initial_path: Option<PathBuf>) -> Self {
+  pub fn select_folder(initial_path: &PathBuf) -> Self {
     FileDialog::new(DialogType::SelectFolder, initial_path)
   }
 
   /// Create dialog that prompts the user to open a file.
-  pub fn open_file(initial_path: Option<PathBuf>) -> Self {
+  pub fn open_file(initial_path: &PathBuf) -> Self {
     FileDialog::new(DialogType::OpenFile, initial_path)
   }
 
   /// Create dialog that prompts the user to save a file.
-  pub fn save_file(initial_path: Option<PathBuf>) -> Self {
+  pub fn save_file(initial_path: &PathBuf) -> Self {
     FileDialog::new(DialogType::SaveFile, initial_path)
   }
 
   /// Constructs new file dialog. If no `initial_path` is passed,`env::current_dir` is used.
-  fn new(dialog_type: DialogType, initial_path: Option<PathBuf>) -> Self {
-    let mut path = initial_path.unwrap_or_else(|| env::current_dir().unwrap_or_default());
+  fn new(dialog_type: DialogType, initial_path: &PathBuf) -> Self {
+    let mut path = initial_path.to_path_buf();
     let mut filename_edit = String::new();
     let info = FileInfo::new(path.clone());
 
@@ -334,8 +334,8 @@ impl FileDialog {
   }
 
   /// Set the dialog's current opened path
-  pub fn set_path(&mut self, path: PathBuf) {
-    self.path = path;
+  pub fn set_path(&mut self, path: &PathBuf) {
+    self.path = path.to_path_buf();
     self.refresh();
   }
 
@@ -352,7 +352,7 @@ impl FileDialog {
   fn open_selected(&mut self) {
     if let Some(info) = &self.selected_file {
       if info.is_dir() {
-        self.set_path(info.path.clone());
+        self.set_path(&info.path.clone());
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
       }
