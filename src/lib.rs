@@ -44,6 +44,9 @@ pub struct FileDialog {
   /// Editable field with path.
   path_edit: String,
 
+  /// A Hardcoded saving extension
+  save_extension: Option<String>,
+
   /// Selected file path (single select mode).
   selected_file: Option<FileInfo>,
 
@@ -128,21 +131,21 @@ pub type Filter<T> = Box<dyn Fn(&<T as Deref>::Target) -> bool + Send + Sync + '
 impl FileDialog {
   /// Create dialog that prompts the user to select a folder.
   pub fn select_folder(initial_path: Option<PathBuf>) -> Self {
-    FileDialog::new(DialogType::SelectFolder, initial_path)
+    FileDialog::new(DialogType::SelectFolder, initial_path, None)
   }
 
   /// Create dialog that prompts the user to open a file.
   pub fn open_file(initial_path: Option<PathBuf>) -> Self {
-    FileDialog::new(DialogType::OpenFile, initial_path)
+    FileDialog::new(DialogType::OpenFile, initial_path, None)
   }
 
   /// Create dialog that prompts the user to save a file.
   pub fn save_file(initial_path: Option<PathBuf>) -> Self {
-    FileDialog::new(DialogType::SaveFile, initial_path)
+    FileDialog::new(DialogType::SaveFile, initial_path, None)
   }
 
   /// Constructs new file dialog. If no `initial_path` is passed,`env::current_dir` is used.
-  fn new(dialog_type: DialogType, initial_path: Option<PathBuf>) -> Self {
+  fn new(dialog_type: DialogType, initial_path: Option<PathBuf>, save_extension: Option<String>) -> Self {
     let mut path = initial_path.unwrap_or_else(|| env::current_dir().unwrap_or_default());
     let mut filename_edit = String::new();
     let info = FileInfo::new(path.clone());
@@ -157,6 +160,7 @@ impl FileDialog {
     Self {
       path,
       path_edit,
+      save_extension: save_extension,
       selected_file: None,
       filename_edit,
       title: match dialog_type {
@@ -581,8 +585,8 @@ impl FileDialog {
                   }
                 }
                 DialogType::SaveFile => {
-                  if !path.ends_with("actuate") {
-                    path.set_extension("actuate");
+                  if path.extension().is_none() && self.save_extension.is_some() {
+                    path.set_extension(self.save_extension.as_ref().unwrap());
                   }
                   let file_info = FileInfo::new(path);
                   command = Some(match file_info.is_dir() {
