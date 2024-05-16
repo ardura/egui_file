@@ -140,8 +140,8 @@ impl FileDialog {
   }
 
   /// Create dialog that prompts the user to save a file.
-  pub fn save_file(initial_path: Option<PathBuf>) -> Self {
-    FileDialog::new(DialogType::SaveFile, initial_path, None)
+  pub fn save_file(initial_path: Option<PathBuf>, save_extension: Option<String>) -> Self {
+    FileDialog::new(DialogType::SaveFile, initial_path, save_extension)
   }
 
   /// Constructs new file dialog. If no `initial_path` is passed,`env::current_dir` is used.
