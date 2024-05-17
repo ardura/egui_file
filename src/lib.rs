@@ -424,9 +424,7 @@ impl FileDialog {
   }
 
   fn can_save(&self) -> bool {
-    (!self.filename_edit.is_empty() || !self.persist_save_file.is_empty()) && (
-      (self.filename_filter)(self.filename_edit.as_str()) || (self.filename_filter)(self.persist_save_file.as_str())
-    )
+    self.dialog_type == DialogType::SaveFile && !self.persist_save_file.is_empty()
   }
 
   fn can_open(&self) -> bool {
