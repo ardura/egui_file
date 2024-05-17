@@ -359,9 +359,14 @@ impl FileDialog {
   fn open_selected(&mut self) {
     if let Some(info) = &self.selected_file {
       if info.is_dir() {
-        self.set_path(info.path.clone());
         if self.dialog_type == DialogType::SaveFile {
           self.filename_edit = self.persist_save_file.clone();
+          let mut temp = info.path.clone();
+          temp.push(Path::new(&self.filename_edit));
+          let temp_file_info: FileInfo = FileInfo { path: temp, file_type: info.file_type, selected: true };
+          self.set_path(temp_file_info.path);
+        } else {
+          self.set_path(info.path.clone());
         }
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
