@@ -592,10 +592,7 @@ impl FileDialog {
                 }
                 DialogType::SaveFile => {
                   let file_info = FileInfo::new(path);
-                  command = Some(match file_info.is_dir() {
-                    true => Command::Open(file_info),
-                    false => Command::Save(file_info),
-                  });
+                  command = Some(Command::Save(file_info));
                 }
               }
             }
@@ -645,7 +642,8 @@ impl FileDialog {
                   }
                   
                   let path = self.path.join(filename);
-                  command = Some(Command::Save(FileInfo::new(path)));
+                  let file_info = FileInfo::new(path);
+                  command = Some(Command::Save(file_info));
                 };
               });
             }
