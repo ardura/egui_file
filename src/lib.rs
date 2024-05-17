@@ -378,7 +378,9 @@ impl FileDialog {
         self.filename_edit = get_file_name(info).to_owned();
       }
     }
-    //self.selected_file = file;
+    if self.dialog_type != DialogType::SaveFile {
+      self.selected_file = file;
+    }
   }
 
   fn select_reset_multi(&mut self, idx: usize) {
