@@ -353,6 +353,9 @@ impl FileDialog {
     if let Some(info) = &self.selected_file {
       if info.is_dir() {
         self.set_path(info.path.clone());
+        if self.dialog_type == DialogType::SaveFile {
+          comeback
+        }
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
       }
@@ -378,7 +381,7 @@ impl FileDialog {
         self.filename_edit = get_file_name(info).to_owned();
       }
     }
-    self.selected_file = file;
+    //self.selected_file = file;
   }
 
   fn select_reset_multi(&mut self, idx: usize) {
