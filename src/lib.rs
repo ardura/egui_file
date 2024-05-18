@@ -362,6 +362,7 @@ impl FileDialog {
         self.set_path(info.path.clone());
         if self.dialog_type == DialogType::SaveFile {
           self.filename_edit = self.persist_save_file.clone();
+          self.selected_file = None;
         }
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
@@ -390,7 +391,6 @@ impl FileDialog {
         self.filename_edit = get_file_name(info).to_owned();
       } else {
         self.filename_edit = self.persist_save_file.clone();
-        return;
       }
     }
     self.selected_file = file;
