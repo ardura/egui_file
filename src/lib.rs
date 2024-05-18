@@ -378,16 +378,18 @@ impl FileDialog {
   fn refresh(&mut self) {
     self.files = self.read_folder();
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
-    if self.path.is_dir() {
-      self.select(None);
-      self.selected_file = None;
-    }
+    //if self.path.is_dir() {
+      //self.select(None);
+      //self.selected_file = None;
+    //}
   }
 
   fn select(&mut self, file: Option<FileInfo>) {
     if let Some(info) = &file {
       if !info.is_dir() {
         self.filename_edit = get_file_name(info).to_owned();
+      } else {
+        self.filename_edit = self.persist_save_file.clone();
       }
     }
     self.selected_file = file;
