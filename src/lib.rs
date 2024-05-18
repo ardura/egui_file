@@ -378,7 +378,6 @@ impl FileDialog {
   fn refresh(&mut self) {
     self.files = self.read_folder();
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
-    self.path = self.path.join(self.persist_save_file.clone());
     //if self.path.is_dir() {
       //self.select(None);
       //self.selected_file = None;
@@ -391,6 +390,7 @@ impl FileDialog {
         self.filename_edit = get_file_name(info).to_owned();
       } else {
         self.filename_edit = self.persist_save_file.clone();
+        return;
       }
     }
     self.selected_file = file;
