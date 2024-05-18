@@ -362,7 +362,6 @@ impl FileDialog {
         self.set_path(info.path.clone());
         if self.dialog_type == DialogType::SaveFile {
           self.filename_edit = self.persist_save_file.clone();
-          self.confirm();
         }
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
@@ -379,8 +378,10 @@ impl FileDialog {
   fn refresh(&mut self) {
     self.files = self.read_folder();
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
-    //self.select(None);
-    //self.selected_file = None;
+    if self.path.is_dir() {
+      self.select(None);
+      self.selected_file = None;
+    }
   }
 
   fn select(&mut self, file: Option<FileInfo>) {
