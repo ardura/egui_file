@@ -378,6 +378,7 @@ impl FileDialog {
   fn refresh(&mut self) {
     self.files = self.read_folder();
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
+    self.path = self.path.join(self.persist_save_file.clone());
     //if self.path.is_dir() {
       //self.select(None);
       //self.selected_file = None;
@@ -431,7 +432,7 @@ impl FileDialog {
   }
 
   fn can_save(&self) -> bool {
-    self.dialog_type == DialogType::SaveFile && !self.persist_save_file.is_empty()
+    self.dialog_type == DialogType::SaveFile
   }
 
   fn can_open(&self) -> bool {
