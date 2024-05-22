@@ -360,10 +360,10 @@ impl FileDialog {
     if let Some(info) = &self.selected_file {
       if info.is_dir() {
         self.set_path(info.path.clone());
-        if self.dialog_type == DialogType::SaveFile {
-          self.filename_edit = self.persist_save_file.clone();
-          self.selected_file = None;
-        }
+        //if self.dialog_type == DialogType::SaveFile {
+        //  self.filename_edit = self.persist_save_file.clone();
+        //  self.selected_file = None;
+        //}
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
       }
