@@ -50,9 +50,6 @@ pub struct FileDialog {
   /// Editable field with filename.
   filename_edit: String,
 
-  /// Default Filename for saving in Actuate
-  persist_save_file: String,
-
   /// Dialog title text
   title: String,
 
@@ -162,7 +159,6 @@ impl FileDialog {
       path_edit,
       selected_file: None,
       filename_edit,
-      persist_save_file: String::new(),
       title: match dialog_type {
         DialogType::SelectFolder => "📁  Select Folder",
         DialogType::OpenFile => "📂  Open File",
@@ -198,9 +194,6 @@ impl FileDialog {
   /// Set the default file name.
   pub fn default_filename(&mut self, filename: String) {
     self.filename_edit = filename.clone();
-    if self.dialog_type == DialogType::SaveFile {
-      self.persist_save_file = filename;
-    }
   }
 
   /// Set the window title text.
@@ -360,10 +353,6 @@ impl FileDialog {
     if let Some(info) = &self.selected_file {
       if info.is_dir() {
         self.set_path(info.path.clone());
-        //if self.dialog_type == DialogType::SaveFile {
-        //  self.filename_edit = self.persist_save_file.clone();
-        //  self.selected_file = None;
-        //}
       } else if self.dialog_type == DialogType::OpenFile {
         self.confirm();
       }
@@ -389,8 +378,6 @@ impl FileDialog {
     if let Some(info) = &file {
       if !info.is_dir() {
         self.filename_edit = get_file_name(info).to_owned();
-      } else {
-        self.filename_edit = self.persist_save_file.clone();
       }
     }
     self.selected_file = file;
@@ -639,13 +626,7 @@ impl FileDialog {
               ui.horizontal(|ui| {
                 ui.set_enabled(self.can_save());
                 if ui.button("Save").clicked() {
-                  let filename;
-                  if self.persist_save_file.is_empty() {
-                    filename = &self.filename_edit;
-                  } else {
-                    filename = &self.persist_save_file;
-                  }
-                  
+                  let filename = &self.filename_edit;
                   let path = self.path.join(filename);
                   let file_info = FileInfo::new(path);
                   command = Some(Command::Save(file_info));
