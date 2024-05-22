@@ -15,4 +15,4 @@ version = "0.17.0"
 #version = "0.27"
 
 [dependencies]
-nih_plug_egui = { git = "https://github.com/ardura/nih-plug.git", rev = "fed302db1fcfb374f9af90bb872be0edd3ee0568" }
+nih_plug_egui = { git = "https://github.com/ardura/nih-plug.git", rev = "57a61ad08bcb0dd268dea2983980930e11aed716" }
