@@ -419,7 +419,7 @@ impl FileDialog {
   }
 
   fn can_save(&self) -> bool {
-    self.dialog_type == DialogType::SaveFile
+    self.dialog_type == DialogType::SaveFile && !self.filename_edit.is_empty()
   }
 
   fn can_open(&self) -> bool {
@@ -621,6 +621,7 @@ impl FileDialog {
             if should_open_directory {
               if ui.button("Open").clicked() {
                 command = Some(Command::OpenSelected);
+                self.selected_file = None;
               };
             } else {
               ui.horizontal(|ui| {
