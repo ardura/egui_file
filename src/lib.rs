@@ -376,6 +376,7 @@ impl FileDialog {
 
   pub fn deselect(&mut self) {
     self.path = self.directory().to_path_buf();
+    self.filename_edit = String::new();
     self.select(None);
     self.selected_file = None;
   }
