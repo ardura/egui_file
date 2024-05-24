@@ -374,7 +374,7 @@ impl FileDialog {
     //}
   }
 
-  fn deselect(&mut self) {
+  pub fn deselect(&mut self) {
     self.select(None);
     self.selected_file = None;
   }
