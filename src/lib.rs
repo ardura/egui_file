@@ -375,9 +375,7 @@ impl FileDialog {
   }
 
   pub fn deselect(&mut self) {
-    if self.path.is_file() {
-      self.path.pop();
-    }
+    self.path = self.directory().to_path_buf();
     self.select(None);
     self.selected_file = None;
   }
