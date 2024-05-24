@@ -374,6 +374,11 @@ impl FileDialog {
     //}
   }
 
+  fn deselect(&mut self) {
+    self.select(None);
+    self.selected_file = None;
+  }
+
   fn select(&mut self, file: Option<FileInfo>) {
     if let Some(info) = &file {
       if !info.is_dir() {
