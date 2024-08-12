@@ -11,5 +11,5 @@ name = "egui_file"
 repository = "https://github.com/Barugon/egui_file"
 version = "0.18.0"
 
-[dependencies.egui]
-version = "0.28"
+[dependencies]
+nih_plug_egui = { git = "https://github.com/ardura/nih-plug.git", rev = "dcbcf2a7e3f013cfa5f2b63e1a65ae16122d5535" }
