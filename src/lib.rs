@@ -480,6 +480,8 @@ impl FileDialog {
       .open(is_open)
       .default_size(self.default_size)
       .resizable(self.resizable)
+      .fade_in(false)
+      .fade_out(false)
       .collapsible(false);
 
     if let Some(id) = self.id {
