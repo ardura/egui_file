@@ -377,8 +377,8 @@ impl FileDialog {
   fn refresh(&mut self) {
     self.files = self.read_folder();
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
-    self.select(None);
-    self.selected_file = None;
+    //self.select(None);
+    //self.selected_file = None;
   }
 
   fn select(&mut self, file: Option<FileInfo>) {
