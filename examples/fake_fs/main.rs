@@ -1,21 +1,3 @@
-# File dialog window (a.k.a. file picker) for [egui](https://github.com/emilk/egui)
-
-[![Crates.io](https://img.shields.io/crates/v/egui_file)](https://crates.io/crates/egui_file)
-[![docs.rs](https://img.shields.io/badge/docs-website-blue)](https://docs.rs/egui_file)
-
-Taken from the [Dotrix](https://github.com/lowenware/dotrix) project, made into a stand-alone library and modified for more use cases.
-
-![Screenshot from 2022-08-18 07-41-11](https://user-images.githubusercontent.com/16503728/185423412-32cd1b6d-0c2e-48e9-bc08-77c7278d2f1e.png)
-
-## Example
-
-````toml
-[dependencies]
-egui_file = "0.22"
-eframe = "0.31"
-````
-
-````rust
 use eframe::{
   egui::{CentralPanel, Context},
   App, Frame,
@@ -25,6 +7,8 @@ use std::{
   ffi::OsStr,
   path::{Path, PathBuf},
 };
+
+mod fake_fs;
 
 #[derive(Default)]
 pub struct Demo {
@@ -41,7 +25,9 @@ impl App for Demo {
           let ext = Some(OsStr::new("txt"));
           move |path: &Path| -> bool { path.extension() == ext }
         });
-        let mut dialog = FileDialog::open_file(self.opened_file.clone()).show_files_filter(filter);
+        let mut dialog = FileDialog::open_file(self.opened_file.clone())
+          .show_files_filter(filter)
+          .with_fs(Box::new(fake_fs::FakeFs::new()));
         dialog.open();
         self.open_file_dialog = Some(dialog);
       }
@@ -64,4 +50,3 @@ fn main() {
     Box::new(|_cc| Ok(Box::new(Demo::default()))),
   );
 }
-````

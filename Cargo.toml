@@ -9,7 +9,14 @@ keywords = ["file-dialog", "file-picker"]
 license = "MIT"
 name = "egui_file"
 repository = "https://github.com/Barugon/egui_file"
-version = "0.18.0"
+rust-version = "1.76.0"
+version = "0.22.0"
 
-[dependencies]
-nih_plug_egui = { git = "https://github.com/ardura/nih-plug.git", rev = "de315f902d7b5a75f80bc9d4164e4485bf2b34a1" }
+[dependencies.egui]
+version = "0.31"
+
+[dependencies.dyn-clone]
+version = "1.0.17"
+
+[dev-dependencies.eframe]
+version = "0.31"
