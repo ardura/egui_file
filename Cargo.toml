@@ -13,8 +13,8 @@ rust-version = "1.76.0"
 version = "0.22.0"
 
 [dependencies]
-nih_plug = { git = "https://github.com/Ardura/nih-plug.git", rev = "69156f4b8469032391aa28ae9727fb8409261306", features = ["assert_process_allocs"] }
-nih_plug_egui = { git = "https://github.com/Ardura/nih-plug.git", rev = "69156f4b8469032391aa28ae9727fb8409261306" }
+nih_plug = { git = "https://github.com/Ardura/nih-plug.git", rev = "29a31287468065191e32c8886e1d2c2200316e4f", features = ["assert_process_allocs"] }
+nih_plug_egui = { git = "https://github.com/Ardura/nih-plug.git", rev = "29a31287468065191e32c8886e1d2c2200316e4f" }
 
 #[dependencies.egui]
 #version = "0.31"
