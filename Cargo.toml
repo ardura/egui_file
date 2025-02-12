@@ -13,8 +13,8 @@ rust-version = "1.76.0"
 version = "0.22.0"
 
 [dependencies]
-nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", rev = "16c6c58f4d9f08c9c515c991c218bff235cff6e2", features = ["assert_process_allocs"] }
-nih_plug_egui = { git = "https://github.com/robbert-vdh/nih-plug.git", rev = "16c6c58f4d9f08c9c515c991c218bff235cff6e2" }
+nih_plug = { git = "https://github.com/Ardura/nih-plug.git", rev = "01bd486a79b1ec18eea92b6923b799dfec31335a", features = ["assert_process_allocs"] }
+nih_plug_egui = { git = "https://github.com/Ardura/nih-plug.git", rev = "01bd486a79b1ec18eea92b6923b799dfec31335a" }
 
 #[dependencies.egui]
 #version = "0.31"
@@ -22,5 +22,5 @@ nih_plug_egui = { git = "https://github.com/robbert-vdh/nih-plug.git", rev = "16
 [dependencies.dyn-clone]
 version = "1.0.17"
 
-[dev-dependencies.eframe]
-version = "0.31"
+#[dev-dependencies.eframe]
+#version = "0.31"

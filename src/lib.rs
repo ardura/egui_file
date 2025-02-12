@@ -737,8 +737,7 @@ impl FileDialog {
           DialogType::OpenFile => {
             ui.horizontal(|ui| {
               if !self.can_open() {
-                //ui.disable();
-                ui.set_enabled(false);
+                ui.disable();
               }
 
               if ui.button(self.open_button_text.as_ref()).clicked() {
@@ -759,8 +758,7 @@ impl FileDialog {
             } else {
               ui.horizontal(|ui| {
                 if !self.can_save() {
-                  //ui.disable();
-                  ui.set_enabled(false);
+                  ui.disable();
                 }
 
                 if ui.button(self.save_button_text.as_ref()).clicked() {
