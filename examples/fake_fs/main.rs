@@ -1,7 +1,9 @@
+/*
 use eframe::{
-  egui::{CentralPanel, Context},
+  egui::{CentralPanel},
   App, Frame,
 };
+use nih_plug_egui::egui::Context;
 use egui_file::FileDialog;
 use std::{
   ffi::OsStr,
@@ -15,6 +17,7 @@ pub struct Demo {
   opened_file: Option<PathBuf>,
   open_file_dialog: Option<FileDialog>,
 }
+
 
 impl App for Demo {
   fn update(&mut self, ctx: &Context, _frame: &mut Frame) {
@@ -50,3 +53,6 @@ fn main() {
     Box::new(|_cc| Ok(Box::new(Demo::default()))),
   );
 }
+*/
+
+fn main() {}

@@ -12,8 +12,12 @@ repository = "https://github.com/Barugon/egui_file"
 rust-version = "1.76.0"
 version = "0.22.0"
 
-[dependencies.egui]
-version = "0.31"
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", rev = "16c6c58f4d9f08c9c515c991c218bff235cff6e2", features = ["assert_process_allocs"] }
+nih_plug_egui = { git = "https://github.com/robbert-vdh/nih-plug.git", rev = "16c6c58f4d9f08c9c515c991c218bff235cff6e2" }
+
+#[dependencies.egui]
+#version = "0.31"
 
 [dependencies.dyn-clone]
 version = "1.0.17"

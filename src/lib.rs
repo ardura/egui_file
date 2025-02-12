@@ -8,7 +8,7 @@ use std::{
 };
 
 use dyn_clone::clone_box;
-use egui::{Align2, Context, Id, Key, Layout, Pos2, RichText, ScrollArea, TextEdit, Ui, Vec2, Window};
+use nih_plug_egui::egui::{Align, Align2, Context, Id, Key, Layout, Pos2, RichText, ScrollArea, TextEdit, Ui, Vec2, Window};
 use fs::FileInfo;
 use fs::Fs;
 
@@ -598,8 +598,8 @@ impl FileDialog {
       .open(is_open)
       .default_size(self.default_size)
       .resizable(self.resizable)
-      .fade_in(false)
-      .fade_out(false)
+      //.fade_in(false)
+      //.fade_out(false)
       .collapsible(false);
 
     if let Some(id) = self.id {
@@ -656,7 +656,7 @@ impl FileDialog {
             command = Some(Command::UpDirectory);
           }
         });
-        ui.with_layout(Layout::right_to_left(egui::Align::Center), |ui| {
+        ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
           let response = ui.button("⟲").on_hover_text(self.refresh_button_hover_text.as_ref());
           if response.clicked() {
             command = Some(Command::Refresh);
@@ -678,7 +678,7 @@ impl FileDialog {
       ui.add_space(ui.spacing().item_spacing.y * 2.0);
       ui.horizontal(|ui| {
         ui.label(self.file_label_text.as_ref());
-        ui.with_layout(Layout::right_to_left(egui::Align::Center), |ui| {
+        ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
           if self.new_folder && ui.button(self.new_folder_button_text.as_ref()).clicked() {
             command = Some(Command::CreateDirectory);
           }
@@ -737,7 +737,8 @@ impl FileDialog {
           DialogType::OpenFile => {
             ui.horizontal(|ui| {
               if !self.can_open() {
-                ui.disable();
+                //ui.disable();
+                ui.set_enabled(false);
               }
 
               if ui.button(self.open_button_text.as_ref()).clicked() {
@@ -758,7 +759,8 @@ impl FileDialog {
             } else {
               ui.horizontal(|ui| {
                 if !self.can_save() {
-                  ui.disable();
+                  //ui.disable();
+                  ui.set_enabled(false);
                 }
 
                 if ui.button(self.save_button_text.as_ref()).clicked() {
