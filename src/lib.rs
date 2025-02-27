@@ -776,7 +776,7 @@ impl FileDialog {
         }
 
         #[cfg(unix)]
-        ui.with_layout(Layout::right_to_left(egui::Align::Center), |ui| {
+        ui.with_layout(Layout::right_to_left(nih_plug_egui::egui::Align::Center), |ui| {
           if ui
             .checkbox(&mut self.show_hidden, self.show_hidden_checkbox_text.as_ref())
             .changed()
