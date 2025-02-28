@@ -494,8 +494,8 @@ impl FileDialog {
       self.show_drives,
     );
     self.path_edit = String::from(self.path.to_str().unwrap_or_default());
-    self.select(None);
-    self.selected_file = None;
+    //self.select(None);
+    //self.selected_file = None;
   }
 
   fn select(&mut self, file: Option<Box<dyn VfsFile>>) {
